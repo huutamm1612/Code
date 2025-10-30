@@ -1,25 +1,70 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trợ Lý Dược Liệu AI</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="chat-container">
-    <header class="chat-header">
-      <h1>Trợ Lý Dược Liệu</h1>
-    </header>
 
-    <main id="chat-box" class="chat-box"></main>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <button class="new-chat-btn"><i class="fas fa-plus"></i> New chat</button>
+      </div>
+      <div class="search-chats"><i class="fas fa-search"></i><input type="text" placeholder="Search chats" /></div>
+      <nav class="chat-history"><ul></ul></nav>
+      <div class="sidebar-bottom">
+        <div class="user-info">
+          <div class="avatar">HT</div>
+          <div class="user-details"><div class="name">Hữu Tâm</div></div>
+        </div>
+      </div>
+    </aside>
 
-    <form id="chat-form" class="chat-form">
-      <input id="user-input" type="text" placeholder="Nhập câu hỏi của bạn..." autocomplete="off">
-      <button type="submit">Gửi</button>
-    </form>
+    <main class="main-chat">
+      <header class="chat-header">
+        <div class="model-name">Trợ Lý Dược Liệu AI</div>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="welcome-message"><h1>What can I help with?</h1></div>
+      </div>
+
+      <div class="input-container">
+        <form id="chat-form" class="input-form">
+          <div class="input-wrapper">
+            <textarea id="user-input" placeholder="Ask anything..." rows="1" autocomplete="off"></textarea>
+
+            <!-- VÙNG XEM TRƯỚC ẢNH -->
+            <div id="image-preview" class="image-preview" style="display: none;">
+              <img id="preview-img" src="" alt="Xem trước" />
+              <button type="button" id="remove-image" class="remove-btn" title="Xóa ảnh">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <!-- NÚT UPLOAD ẢNH -->
+            <label for="image-upload" class="upload-btn" title="Gửi ảnh">
+              <i class="fas fa-image"></i>
+            </label>
+            <input type="file" id="image-upload" accept="image/*" style="display: none;" />
+
+            <!-- NÚT GỬI -->
+            <button type="submit" id="send-btn" disabled>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+          <div class="input-footer">
+            <small>Trợ lý có thể sai. Hãy kiểm tra thông tin y khoa quan trọng.</small>
+          </div>
+        </form>
+      </div>
+    </main>
   </div>
 
-  <script src="/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
