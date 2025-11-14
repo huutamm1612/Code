@@ -14,8 +14,8 @@ from langchain_community.vectorstores import FAISS
 CONFIG = {
     "embedding model": config.get('embedding_settings', {}).get('embedding_model'),
     "use gpu": torch.cuda.is_available(),
-    "file path": 'data/medical plan.csv',
-    "faiss index path": 'faiss_index',
+    "file path": config.get('paths', {}).get('medical_info_path'),
+    "faiss index path": config.get('paths', {}).get('faiss_index'),
     "chunk size": config.get('embedding_settings', {}).get('chunk_size'),
     "chunk overlap": config.get('embedding_settings', {}).get('chunk_overlap'),
 }

@@ -1,15 +1,16 @@
 llm_settings:
-  llm_model: "SeaLLMs/SeaLLMs-v3-1.5B-Chat"
+  llm_model: "phamhai/Llama-3.2-3B-Instruct-Frog"
   max_tokens: 256
   top_k: 5,
   top_p: 0.9,
   temperature: 0.7,
   
 embedding_settings:  
-  embedding_model: "intfloat/multilingual-e5-base"
+  embedding_model: "BAAI/bge-m3"
   chunk_size: 256
   chunk_overlap: 48
 
 paths:
+  medical_info_path: "data/medical plan.csv"
   faiss_index: "faiss_index/"
   data_source: "data/"

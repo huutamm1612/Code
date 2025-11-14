@@ -1,4 +1,3 @@
-// === DOM ===
 const form = document.getElementById('chat-form');
 const input = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
@@ -9,9 +8,8 @@ const previewContainer = document.getElementById('image-preview'); // <<< THÊM
 const previewImg = document.getElementById('preview-img');         // <<< THÊM
 const removeBtn = document.getElementById('remove-image');         // <<< THÊM
 
-const API_URL = "https://ca347c1cf367.ngrok-free.app";
+const API_URL = "https://5dc6f0d9781b.ngrok-free.app";
 
-// === ẢNH ===
 let selectedImage = null;
 
 imageInput.addEventListener('change', (e) => {
@@ -22,7 +20,6 @@ imageInput.addEventListener('change', (e) => {
   reader.onload = (ev) => {
     selectedImage = { file, dataUrl: ev.target.result };
 
-    // HIỂN THỊ XEM TRƯỚC
     previewImg.src = ev.target.result;
     previewContainer.style.display = 'flex';
 
@@ -31,7 +28,6 @@ imageInput.addEventListener('change', (e) => {
   reader.readAsDataURL(file);
 });
 
-// === XÓA ẢNH ===
 removeBtn.addEventListener('click', () => {
   selectedImage = null;
   imageInput.value = '';
@@ -45,7 +41,6 @@ function resetImage() {
   previewContainer.style.display = 'none';
 }
 
-// === ENTER / SHIFT+ENTER ===
 input.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
@@ -53,7 +48,6 @@ input.addEventListener('keydown', (e) => {
   }
 });
 
-// === CO GIÃN + NÚT GỬI ===
 input.addEventListener('input', updateSendButton);
 
 function updateSendButton() {
@@ -65,27 +59,23 @@ function updateSendButton() {
   sendBtn.style.opacity = canSend ? '1' : '0.5';
 }
 
-// === GỬI ===
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const prompt = input.value.trim();
   const hasImage = !!selectedImage;
   if (!prompt && !hasImage) return;
-  // === TẠO 1 DIV DUY NHẤT CHO USER ===
   const userMessage = document.createElement('div');
   userMessage.className = 'message user combined-message'; // 1 class
 
   let contentHTML = '';
 
-  // Thêm ảnh (nếu có)
   if (hasImage) {
     contentHTML += `
       <img src="${selectedImage.dataUrl}" class="chat-user-image" alt="Ảnh bạn gửi" />
     `;
   }
 
-  // Thêm text (nếu có)
   if (prompt) {
     contentHTML += `
       <div class="message-text">
@@ -97,12 +87,10 @@ form.addEventListener('submit', async (e) => {
   userMessage.innerHTML = `<div class="message-content">${contentHTML}</div>`;
   messages.appendChild(userMessage);
 
-  // Cập nhật lịch sử
-  addToHistory(prompt || '[Đã gửi ảnh]');
+  // addToHistory(prompt || '[Đã gửi ảnh]');
 
   const typing = showTyping();
 
-  // === CHUẨN BỊ GỬI DỮ LIỆU ===
   const formData = new FormData();
   if (prompt) formData.append('prompt', prompt);
   if (hasImage) formData.append('image', selectedImage.file);
@@ -113,7 +101,7 @@ form.addEventListener('submit', async (e) => {
   resetImage();
   updateSendButton();
 
-  console.log("🟢 GỬI DỮ LIỆU:");
+  console.log("GỬI DỮ LIỆU:");
   for (let pair of formData.entries()) {
     console.log(pair[0] + ":", pair[1]);
   }
